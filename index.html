@@ -6,10 +6,26 @@
     <title>Calculator</title>
 </head>
 <body>
+
+    <div id="calcuator-container">
+        <div id="button-container">
+            <button class="numBtn">9</button>
+            <button class="numBtn">8</button>
+            <button class="numBtn">7</button>
+            <button class="numBtn">6</button>
+            <button class="numBtn">5</button>
+            <button class="numBtn">4</button>
+            <button class="numBtn">3</button>
+            <button class="numBtn">2</button>
+            <button class="numBtn">1</button>
+            <button class="numBtn">0</button>
+            <button>=</button>
+        </div>
+    </div>
     
     <script>
         //function to calculate do the calculation
-        const calculate = (var1, operator, var2) => {
+        const operate = (var1, operator, var2) => {
             if(operator == "add"){
                 return var1+var2;
             }else if(operator == "subtract"){
