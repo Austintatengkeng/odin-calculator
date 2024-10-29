@@ -1,8 +1,10 @@
 #calculator{
     border: 3px solid black;
+    height: 600px;
+    width: 400px;
 }
 
-#result-container{
+#display{
     width: 150px;
     height: 50px;
     background-color: aqua;
@@ -19,3 +21,4 @@
     height: calc(200px/4);
     width: calc(150px/3);
 }
+
