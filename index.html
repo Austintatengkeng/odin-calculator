@@ -13,16 +13,19 @@
             <button class="num btn">9</button>
             <button class="num btn">8</button>
             <button class="num btn">7</button>
+            <button class="operator btn">÷</button>
             <button class="num btn">6</button>
             <button class="num btn">5</button>
             <button class="num btn">4</button>
+            <button class="operator btn">×</button>
             <button class="num btn">3</button>
             <button class="num btn">2</button>
             <button class="num btn">1</button>
+            <button class="operator btn">-</button>
             <button class="num btn">0</button>
-            <button class="btn">=</button>
-            <button class="btn">Clear</button>
-            <button></button>
+            <button class="clear btn">C</button>
+            <button class="operator btn">=</button>
+            <button class="operator btn">+</button>
         </div>
     </div>
     
@@ -47,7 +50,7 @@
 
         //To updates display
         const updateDisplay = () => {
-            display.textContent = displayValue || "0";
+            display.innerHTML = displayValue || "0";
         }
 
         //function responsible for handle number button being clicked
@@ -69,6 +72,7 @@
             }
         }
 
+        //add event listener to the button
         document.querySelector("#button-container").addEventListener("click", handleButtonClick);
 
         //Initiliaze Display
