@@ -24,58 +24,115 @@
             <button class="operator btn">-</button>
             <button class="num btn">0</button>
             <button class="clear btn">C</button>
-            <button class="operator btn">=</button>
+            <button class="equals btn">=</button>
             <button class="operator btn">+</button>
         </div>
     </div>
     
     <script>
-        //function to perform the calculation
+        // Function to perform the calculation
         const operate = (var1, operator, var2) => {
-            if(operator == "add"){
-                return var1+var2;
-            }else if(operator == "subtract"){
-                return var1-var2l
-            }else if(operator == "multiply"){
-                return var1*var2;
-            }else if(operator == "divide"){
-                return var1 / var2;
+            let result;
+            if (operator === "+") {
+                result = var1 + var2;
+            } else if (operator === "-") {
+                result = var1 - var2;
+            } else if (operator === "×") {
+                result = var1 * var2;
+            } else if (operator === "÷") {
+                result = var2 !== 0 ? var1 / var2 : "Error"; // Handle divide by zero
             }
-        }
+            displayValue = String(result);
+            updateDisplay();
+            firstNum = result;
+            secondNum = null;
+            currNumber = "";
+        };
 
-        //variables that hold current value and calculations
+        // Variables to hold current values and calculations
         let displayValue = "";
+        let firstNum = null;
+        let secondNum = null;
+        let operator = null;
+        let currNumber = "";
 
         const display = document.querySelector("#display");
 
-        //To updates display
+        // Update the display
         const updateDisplay = () => {
             display.innerHTML = displayValue || "0";
-        }
+        };
 
-        //function responsible for handle number button being clicked
+        // Handle number button click
         const handleNumberClick = (number) => {
+            if (operator && firstNum !== null && !currNumber) {
+                // Start fresh display for the next number after an operator
+                displayValue = "";
+            }
             displayValue += number;
+            currNumber += number;
             updateDisplay();
-        }
+        };
+
+        // Handle operator button click
+        const handleOperatorClick = (symbol) => {
+            if (currNumber) {
+                if (firstNum !== null && operator) {
+                    // Perform operation if there's an existing firstNum and operator
+                    secondNum = parseFloat(currNumber);
+                    operate(firstNum, operator, secondNum);
+                } else {
+                    // Set firstNum if this is the first operation
+                    firstNum = parseFloat(currNumber);
+                }
+            }
+            operator = symbol;
+            displayValue += " " + symbol + " ";
+            currNumber = "";
+            updateDisplay();
+        };
+
+        // Handle equals button click
+        const handleEqualsClick = () => {
+            if (firstNum !== null && operator && currNumber) {
+                secondNum = parseFloat(currNumber);
+                operate(firstNum, operator, secondNum);
+                operator = null; // Reset operator after equals
+            }
+        };
+
+        // Handle clear button click
+        const handleClearClick = () => {
+            displayValue = "";
+            firstNum = null;
+            secondNum = null;
+            operator = null;
+            currNumber = "";
+            updateDisplay();
+        };
         
-        //Funtion to handle button clicks
+        // Function to handle button clicks
         const handleButtonClick = (event) => {
             const target = event.target;
             const value = target.innerText;
 
             if (target.classList.contains("btn")) {
-                const value = target.innerText;
-
-                displayValue += value;
-                updateDisplay();
+                if (target.classList.contains("num")) {
+                    handleNumberClick(value);
+                } else if (target.classList.contains("operator")) {
+                    handleOperatorClick(value);
+                } else if (target.classList.contains("equals")) {
+                    handleEqualsClick();
+                } else if (target.classList.contains("clear")) {
+                    handleClearClick();
+                }
             }
-        }
+        };
 
-        //add event listener to the button
+        // Add event listener to the button container
         document.querySelector("#button-container").addEventListener("click", handleButtonClick);
 
-        //Initiliaze Display
+        // Initialize display
         updateDisplay();
     </script>
 </body>

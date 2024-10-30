@@ -24,7 +24,8 @@ body{
     font-weight: bold;
     padding-right: 30px;
     line-height: 60px;
-    color: white
+    color: white;
+    overflow-x: hidden;
 }
 
 #button-container{
