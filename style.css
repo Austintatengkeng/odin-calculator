@@ -49,7 +49,7 @@ body{
 
 }
 
-.operator{
+.operator, .equals{
     background-color: rgb(65, 153, 221);
     color: white;
 }
